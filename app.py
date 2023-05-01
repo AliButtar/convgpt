@@ -66,7 +66,7 @@ if st.button("Generate Response", use_container_width=True):
 with st.expander("**Use this response**", expanded=True):
     # Write the repsonse in a markdown with green color and create a red outline around the text
     if "response" in st.session_state:
-        st.markdown(f":green[{st.session_state.response}]")
+        st.markdown(f"{st.session_state.response}")
 
         # Create a button to copy the response to clipboard
         if st.button("Copy to Clipboard", use_container_width=True):
