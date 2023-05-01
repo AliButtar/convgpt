@@ -1,0 +1,15 @@
+<script>
+    const streamlitDoc = window.parent.document;
+    
+    const buttons = Array.from(streamlitDoc.querySelectorAll('.stButton > button'));
+    // console.log(buttons) // find buttons in console tab
+    
+    const copy_button = buttons.find(el => el.innerText === 'Copy to Clipboard');
+    
+    copy_button.style.backgroundColor = "coral"
+    
+    // on pressing left button copy the python code to clipboard
+    copy_button.addEventListener('click', function(e) {
+        window.parent.navigator.clipboard.writeText(python_string)
+    });
+    </script>

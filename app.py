@@ -1,11 +1,16 @@
 # Imports
 import streamlit as st
-import pyperclip
+import streamlit.components.v1 as components
 
 from langchain import LLMChain, PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 
+def read_html():
+    with open("index.html") as f:
+        return f.read().replace(
+            "python_string", f'"{st.session_state.response}"')
+        
 # Title of Web App
 st.title("Have better conversations using AI 🧑‍💻💬")
 
@@ -69,9 +74,7 @@ with st.expander("**Use this response**", expanded=True):
         st.markdown(f"{st.session_state.response}")
 
         # Create a button to copy the response to clipboard
-        if st.button("Copy to Clipboard", use_container_width=True):
-            pyperclip.copy(st.session_state.response)
-            st.success("Copied to Clipboard")
+        st.button("Copy to Clipboard", use_container_width=True)
 
 with st.expander("**See the conversation history**"):
     if "chat_memory" in st.session_state:
@@ -83,5 +86,8 @@ with st.expander("**See the conversation history**"):
             else:
                 st.write(message_list[1])
             st.write(message["content"])
+
+if "response" in st.session_state:
+    components.html(read_html(), height=0, width=0)
 
 # streamlit run app.py --runner.fastReruns=False --server.runOnSave=False --server.port=8501 --server.headless=True --global.developmentMode=False

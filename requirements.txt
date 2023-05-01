@@ -2,4 +2,3 @@ langchain
 openai
 tiktoken
 streamlit
-pyperclip
